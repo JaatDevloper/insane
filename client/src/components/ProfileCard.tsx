@@ -84,7 +84,7 @@ export default function ProfileCard() {
               </svg>
             </span>
           </div>
-          <p className="text-sm text-gray-400 font-bold tracking-widest uppercase mb-1">@dovxo • he/him</p>
+          <p className="text-sm text-gray-400 font-bold tracking-widest uppercase mb-1">@insane_here • he/him</p>
         </div>
 
         {/* Info Section */}
@@ -108,6 +108,13 @@ export default function ProfileCard() {
               <Users size={20} />
             </div>
             <span className="font-semibold text-sm">Jaat Hindu Community</span>
+          </div>
+
+          <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
+             <div className="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600 shrink-0 shadow-sm">
+              <Send size={20} />
+            </div>
+            <a href="https://t.me/dovxo" target="_blank" rel="noopener noreferrer" className="font-semibold text-sm hover:text-sky-600 transition-colors">Telegram: @dovxo</a>
           </div>
 
           <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
