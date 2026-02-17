@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   MapPin, 
   Code2, 
@@ -8,39 +8,63 @@ import {
   MessageCircle, 
   Github, 
   Instagram, 
-  Send 
+  Send,
+  Quote
 } from "lucide-react";
 import avatarImg from "../assets/avatar.png";
 import coverImg from "../assets/cover-bg.png";
 
+const jaatQuotes = [
+  "जाट का खून हूँ, झुकना मेरी फितरत में नहीं।",
+  "खेती करना हमारा शौक है, और रौब झाड़ना हमारा खानदानी हक।",
+  "जाट के ठाठ देख के दुनिया जलती है, और जलना भी चाहिए क्योंकि हमारी चाल ही निराली है।",
+  "शेर की दहाड़ और जाट की ललकार, अच्छे-अच्छों के पसीने छुड़ा देती है।",
+  "हथियार तो शौक के लिए रखते हैं, खौफ के लिए तो जाट का नाम ही काफी है।",
+  "हमारी सादगी ही हमारा श्रृंगार है, और हमारा एटीट्यूड हमारा स्वाभिमान।",
+  "जाट की दोस्ती और जाट की दुश्मनी, दोनों ही बड़ी भारी पड़ती हैं।",
+  "सिस्टम कोई भी हो, चलेगा तो जाट के हिसाब से ही।",
+  "लोहे को लोहा काटता है, और बदमाश को जाट काटता है।",
+  "दुनिया कहती है 'रुक जाओ', पर जाट का दिल कहता है 'एक बार और कोशिश कर'।",
+  "दब दब के जीना जाट की आदत नहीं, हम तो शान से जीते हैं और शान से मरते हैं।"
+];
+
 export default function ProfileCard() {
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentQuoteIndex((prev) => (prev + 1) % jaatQuotes.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="w-full max-w-md bg-white rounded-[32px] shadow-xl overflow-hidden relative font-sans"
+      className="w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden relative font-sans border border-gray-100"
     >
       {/* Cover Section */}
-      <div className="h-36 w-full relative">
+      <div className="h-40 w-full relative">
         <img 
           src={coverImg} 
           alt="Cover" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
       </div>
 
       {/* Profile Content */}
       <div className="px-6 pb-8 relative">
         
         {/* Avatar */}
-        <div className="relative -mt-16 mb-4 flex justify-center">
+        <div className="relative -mt-20 mb-4 flex justify-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="rounded-full p-1.5 bg-white shadow-lg"
+            className="rounded-full p-1.5 bg-white shadow-xl"
           >
-            <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-white relative">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white relative shadow-inner">
               <img 
                 src={avatarImg} 
                 alt="Profile Avatar" 
@@ -53,63 +77,87 @@ export default function ProfileCard() {
         {/* Name & Badge */}
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 mb-1">
-            <h1 className="text-2xl font-bold text-gray-800 tracking-tight">INSANE</h1>
-            <span className="text-blue-500 bg-blue-50 rounded-full p-0.5" title="Verified">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+            <h1 className="text-3xl font-black text-gray-900 tracking-tighter uppercase italic">INSANE</h1>
+            <span className="text-blue-500 bg-blue-50 rounded-full p-1 shadow-sm" title="Verified">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="w-4.5 h-4.5">
                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
               </svg>
             </span>
           </div>
-          <p className="text-sm text-gray-500 font-medium mb-1">@insane_dev • he/him</p>
+          <p className="text-sm text-gray-400 font-bold tracking-widest uppercase mb-1">@insane_here • he/him</p>
         </div>
 
         {/* Info Section */}
-        <div className="space-y-3 mb-8 px-2">
-          <div className="flex items-center gap-3 text-gray-600 text-sm">
-            <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 shrink-0">
-              <MapPin size={16} />
+        <div className="grid grid-cols-1 gap-2.5 mb-8 px-2">
+          <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
+            <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 shadow-sm">
+              <MapPin size={20} />
             </div>
-            <span>India</span>
+            <span className="font-semibold text-sm">India</span>
           </div>
           
-          <div className="flex items-center gap-3 text-gray-600 text-sm">
-             <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 shrink-0">
-              <Code2 size={16} />
+          <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
+             <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 shrink-0 shadow-sm">
+              <Code2 size={20} />
             </div>
-            <span>Android App Developer & Python Programmer</span>
+            <span className="font-semibold text-sm leading-tight">Android App Developer & Python Programmer</span>
           </div>
 
-          <div className="flex items-center gap-3 text-gray-600 text-sm">
-             <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 shrink-0">
-              <Users size={16} />
+          <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
+             <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 shrink-0 shadow-sm">
+              <Users size={20} />
             </div>
-            <span>Jaat Hindu Community</span>
+            <span className="font-semibold text-sm">Jaat Hindu Community</span>
           </div>
         </div>
 
         {/* Quote Section */}
-        <div className="mb-8 relative py-4 px-6 bg-amber-50/50 rounded-2xl border border-amber-100/50">
-          <p className="text-center text-amber-800/90 text-lg leading-relaxed font-serif italic" style={{ fontFamily: '"Noto Serif Devanagari", serif' }}>
-            "जाट का खून हूँ, झुकना मेरी फितरत में नहीं।"
-          </p>
+        <div className="mb-8 relative py-6 px-8 bg-zinc-900 rounded-3xl overflow-hidden shadow-lg group">
+          <div className="absolute top-2 left-4 text-white/10 group-hover:text-white/20 transition-colors">
+            <Quote size={40} />
+          </div>
+          <div className="relative h-20 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.p 
+                key={currentQuoteIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="text-center text-white text-lg font-bold leading-relaxed italic" 
+                style={{ fontFamily: '"Noto Serif Devanagari", serif' }}
+              >
+                "{jaatQuotes[currentQuoteIndex]}"
+              </motion.p>
+            </AnimatePresence>
+          </div>
+          <div className="flex justify-center gap-1 mt-4">
+            {jaatQuotes.map((_, i) => (
+              <div 
+                key={i} 
+                className={`h-1 rounded-full transition-all duration-300 ${i === currentQuoteIndex ? 'w-4 bg-orange-500' : 'w-1 bg-white/20'}`}
+              />
+            ))}
+          </div>
+          <p className="absolute bottom-2 right-4 text-[10px] text-white/30 uppercase tracking-[0.2em] font-black italic">— Jaat</p>
         </div>
 
         {/* Action Buttons */}
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 px-4 rounded-full font-medium text-sm shadow-md shadow-gray-200 hover:shadow-lg transition-all"
+              className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3.5 px-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-gray-200 hover:shadow-2xl transition-all"
             >
               <UserPlus size={18} />
               Add Friend
             </motion.button>
             
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 py-3 px-4 rounded-full font-medium text-sm hover:bg-gray-50 transition-all"
+              className="flex items-center justify-center gap-2 bg-white border-2 border-gray-900 text-gray-900 py-3.5 px-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all shadow-md"
             >
               <MessageCircle size={18} />
               Message
@@ -117,15 +165,15 @@ export default function ProfileCard() {
           </div>
 
           {/* Social Icons */}
-          <div className="flex justify-center gap-6 pt-2">
+          <div className="flex justify-center gap-8 pt-4">
             {[Github, Instagram, Send].map((Icon, i) => (
               <motion.a
                 key={i}
                 href="#"
-                whileHover={{ y: -3, color: "#ea580c" }}
-                className="text-gray-400 transition-colors p-2"
+                whileHover={{ y: -5, scale: 1.2, color: i === 2 ? "#0088cc" : i === 1 ? "#E1306C" : "#000" }}
+                className="text-gray-400 transition-all p-2"
               >
-                <Icon size={22} />
+                <Icon size={24} strokeWidth={2.5} />
               </motion.a>
             ))}
           </div>
