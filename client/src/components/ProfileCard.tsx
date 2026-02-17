@@ -6,10 +6,10 @@ import {
   Users, 
   UserPlus, 
   MessageCircle, 
-  Github, 
-  Instagram, 
   Send,
-  Quote
+  Quote,
+  Globe,
+  Mail
 } from "lucide-react";
 import avatarImg from "../assets/avatar.png";
 import coverImg from "../assets/cover-bg.png";
@@ -84,7 +84,7 @@ export default function ProfileCard() {
               </svg>
             </span>
           </div>
-          <p className="text-sm text-gray-400 font-bold tracking-widest uppercase mb-1">@insane_here • he/him</p>
+          <p className="text-sm text-gray-400 font-bold tracking-widest uppercase mb-1">@dovxo • he/him</p>
         </div>
 
         {/* Info Section */}
@@ -108,6 +108,20 @@ export default function ProfileCard() {
               <Users size={20} />
             </div>
             <span className="font-semibold text-sm">Jaat Hindu Community</span>
+          </div>
+
+          <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
+             <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
+              <Globe size={20} />
+            </div>
+            <a href="https://MrJaat.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-sm hover:text-emerald-600 transition-colors">MrJaat.com</a>
+          </div>
+
+          <div className="flex items-center gap-4 text-gray-700 bg-gray-50/50 p-3 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all cursor-default">
+             <div className="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 shrink-0 shadow-sm">
+              <Mail size={20} />
+            </div>
+            <a href="mailto:Mrjaat16x7@gmail.com" className="font-semibold text-sm hover:text-rose-600 transition-colors">Mrjaat16x7@gmail.com</a>
           </div>
         </div>
 
@@ -166,16 +180,26 @@ export default function ProfileCard() {
 
           {/* Social Icons */}
           <div className="flex justify-center gap-8 pt-4">
-            {[Github, Instagram, Send].map((Icon, i) => (
-              <motion.a
-                key={i}
-                href="#"
-                whileHover={{ y: -5, scale: 1.2, color: i === 2 ? "#0088cc" : i === 1 ? "#E1306C" : "#000" }}
-                className="text-gray-400 transition-all p-2"
-              >
-                <Icon size={24} strokeWidth={2.5} />
-              </motion.a>
-            ))}
+            <motion.a
+              href="https://t.me/dovxo"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -5, scale: 1.2, color: "#0088cc" }}
+              className="text-gray-400 transition-all p-2"
+              title="Telegram"
+            >
+              <Send size={28} strokeWidth={2.5} />
+            </motion.a>
+            <motion.a
+              href="https://MrJaat.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -5, scale: 1.2, color: "#10b981" }}
+              className="text-gray-400 transition-all p-2"
+              title="Website"
+            >
+              <Globe size={28} strokeWidth={2.5} />
+            </motion.a>
           </div>
         </div>
 
